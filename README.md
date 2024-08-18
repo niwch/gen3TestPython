@@ -18,10 +18,11 @@ mosquitto_sub -h broker.emqx.io -p 1883 -t SIF_SSPF_WakeupRequest -t SendSignalR
 
 // 发布
 1. 模拟vsp 向车端发送控车报文 VSP_RemoteControlEvent ，为了获取控车指令的request ID
-mosquitto_pub -h broker.emqx.io -p 1883 -t VSP_RemoteControlEvent -m "{"time":1721181600,"messagetype":"1101","cmd":{"requestId":"1234","remoteKe":"doorlockcontrol","operation":"1"}}" 
+mosquitto_pub -h broker.emqx.io -p 1883 -t VSP_RemoteControlEvent -m '{"time":1721181600,"messagetype":"1101","cmd":{"requestId":"1234","remoteKey":"doorlockcontrol","operation":"1"}}' 
 
 2. 模拟车端回复 VSP_ReportControlResult 控车结果报文
+mosquitto_pub -h broker.emqx.io -p 1883 -t VSP_ReportControlResult -m '{"cmdtime":1721181600,"requestid":"1234","result":0,"failmessage":"","errorcode":0,"msgid":0,"msgidtoack":0}'
 
 3. 模拟车端回复 VSP_UploadCarStatus 车辆状态报文
-
+mosquitto_pub -h broker.emqx.io -p 1883 -t VSP_UploadCarStatus -m '{"time":1721181600,"requestid":"1234","business":"0","status":{"doorlockstatus":"0"}}'
 ```
