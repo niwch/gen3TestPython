@@ -1,0 +1,9 @@
+{
+    "mqtt" : {
+        "address" : "broker.emqx.io",
+        "port" : 1883,
+        "clientid" : "SGL0000413032020F",
+        "login" : "test12112",
+        "passwd" : "test12112" 
+    }
+}

@@ -1,0 +1,76 @@
+{
+    "NMStub" : {
+        "//comment": "为NMStub 预设值",
+        "pub" : [
+            {
+                "topic" : "SIF_SSPF_WakeupRequest",
+                "message" : {
+                    "RequestSurvivalTime":1000
+                }
+            }
+        ],
+        "sub" : []
+    },
+    "S2SStub" : {
+        "//comment": "S2SStub 预设值, 包括SendSignalResult 和 GetRawSignalResult两个api",
+        "pub" : [
+            {
+                "topic":"SendSignalResult",
+                "message" : {
+                    "signal_list": [
+                        {
+                            "signal_name": 1,
+                            "value": "0x2",
+                            "error": 0,
+                            "signal_error": 0
+                        },
+                        {
+                            "signal_name": 2,
+                            "error": -1,
+                            "signal_error": -3
+                        }
+                    ]
+                }
+            },
+            {
+                "topic" : "GetRawSignalResult",
+                "message" : {
+                    "signal_list": [
+                        {
+                            "signal_name": 1,
+                            "value": "0x2",
+                            "error_code": 0
+                        },
+                        {
+                            "signal_name": 2,
+                            "value": "0x0",
+                            "error_code": -3
+                        }
+                    ]
+                }
+            }
+        ],
+        "sub" : []          
+    },
+    "VSPStub" : {
+        "//comment": "向VSPStub 发布一条控车指令",
+        "pub" : {
+            "topic" : "VSP_Step", 
+            "message" : {                
+                "cmd":"doorlockcontrol",
+                "arg":"1"                 
+            }
+        },
+        
+        "//comment_sub": "订阅信(VSP_RemoteControlEvent: VSP->车的控车指令; VSP_ReportControlResult: 控车结果; VSP_UploadCarStatus: 车辆状态)",
+        "sub" : [ "VSP_RemoteControlEvent", "VSP_ReportControlResult", "VSP_UploadCarStatus"]
+    },
+
+    
+    "VSP_UploadCarStatus" : {
+        "//comment":"期待结果, 即VSP_UploadCarStatus 返回的车辆状态与之对比, 验证本次控车流是否成功",
+        "status": {
+            "doorlockstatus": "0"
+        }
+    }
+}
