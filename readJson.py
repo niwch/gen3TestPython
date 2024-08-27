@@ -27,4 +27,4 @@ def getMqttCfg(path) :
         data = json.load(file)   
         return data["mqtt"]
     return None      
-    
+      

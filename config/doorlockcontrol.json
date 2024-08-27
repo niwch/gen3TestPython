@@ -5,7 +5,7 @@
             {
                 "topic" : "SIF_SSPF_WakeupRequest",
                 "message" : {
-                    "RequestSurvivalTime":1000
+                    "RequestSurvivalTime":1234
                 }
             }
         ],
@@ -52,6 +52,7 @@
         ],
         "sub" : []          
     },
+
     "VSPStub" : {
         "//comment": "向VSPStub 发布一条控车指令",
         "pub" : {
@@ -65,7 +66,6 @@
         "//comment_sub": "订阅信(VSP_RemoteControlEvent: VSP->车的控车指令; VSP_ReportControlResult: 控车结果; VSP_UploadCarStatus: 车辆状态)",
         "sub" : [ "VSP_RemoteControlEvent", "VSP_ReportControlResult", "VSP_UploadCarStatus"]
     },
-
     
     "VSP_UploadCarStatus" : {
         "//comment":"期待结果, 即VSP_UploadCarStatus 返回的车辆状态与之对比, 验证本次控车流是否成功",

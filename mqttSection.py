@@ -4,19 +4,22 @@ from readJson import getMqttCfg
 
 class mqttSection:
     def __init__(self, mqttFn, on_connectCB, on_messageCB):  
-        self.client = mqtt.Client()
         
-        # 设置回调函数
-        self.client.on_connect = on_connectCB
-        self.client.on_message = on_messageCB
         # 链接mqtt网关
         mqttJson = getMqttCfg(mqttFn)
         if mqttJson is not None:
+            self.client = mqtt.Client(client_id=mqttJson["clientid"], clean_session=True)
+            # 设置回调函数
+            self.client.on_connect = on_connectCB
+            self.client.on_message = on_messageCB
             ret = self.client.connect(mqttJson["address"], mqttJson["port"], 60)
             print(ret)
         else:
             raise ValueError("mqtt config param error")
-        
+
+    def disconnect(self):
+        print("close mqtt connect")
+        self.client.disconnect()    
 
     # 链接状态
     def is_connected(self) :

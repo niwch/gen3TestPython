@@ -1,5 +1,6 @@
 # gen3TestPython
 测试工具
+linux环境，需要支持python3
 
 ## 安装
 ```
@@ -11,7 +12,18 @@ sudo apt-get install mosquitto-clients
 
 ```
 
-## 测试命令
+## 启动
+配置文件中每一个json代表一个测试用例
+```
+python3 ./main.py --dir=$PATH --cmd=$cmd
+// PATH: 配置文件路径
+// cmd: 配置文件路径中的某一个json文件前缀，可选，不填写cmd默认全部测试
+
+eg: python3 ./main.py --dir=$HOME/gen3TestPython/config                         // 测试配置路径下的所有用例
+eg: python3 ./main.py --dir=$HOME/gen3TestPython/config --cmd=doorlockcontrol   // 测试配置路径下的doorlockcontrol用例
+```
+
+## 自测命令
 ``` txt
 // 订阅
 mosquitto_sub -h broker.emqx.io -p 1883 -t SIF_SSPF_WakeupRequest -t SendSignalResult -t GetRawSignalResult -t VSP_Step -t VSP_RemoteControlEvent -t VSP_ReportControlResult -t VSP_UploadCarStatus

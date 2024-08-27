@@ -1,14 +1,13 @@
 import glob
 import os
 import threading
-import time
 import argparse
 from controller import controller
 
 mqtt_init_done = threading.Event()
 mqtt_result_done = threading.Event()
 
-def forever(directory, cmd) :
+def foreach(directory, cmd) :
     if args.cmd is not None:
         run(os.path.join(directory, "mqtt.json"), os.path.join(directory, cmd + ".json"))
     else:
@@ -28,11 +27,11 @@ def run(mqttFn, stubfn):
     # 执行cmd
     ctrlInst.execute()
 
-    ret = mqtt_result_done.wait(timeout=300)
+    ret = mqtt_result_done.wait(timeout=3)
     ctrlInst.teardown(ret)
 
 def main(args):   
-    forever(args.dir, args.cmd)    
+    foreach(args.dir, args.cmd)        
 
 if __name__ == "__main__":   
     parser = argparse.ArgumentParser(description="gen3 test scrpt") 

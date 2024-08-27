@@ -28,7 +28,7 @@ class controller:
         
         # 字典用于保存请求-应答的关系
         self.dict = {}
-    
+
     def on_connect(self, client, userdata, flags, rc):
         print("Connected with result code " + str(rc))
         if str(rc) == "0":                        
@@ -128,3 +128,5 @@ class controller:
                     print(suc)
                 else:
                     print(fail)
+        
+        self.mqttInst.disconnect()
